@@ -6,6 +6,9 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddFood from "../pages/AddFood";
+import Fridge from "../pages/Fridge";
+import FoodDetails from "../pages/FoodDetails";
+import MyItems from "../pages/MyItems";
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +22,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "fridge",
-        element: <div>Fridge Page</div>,
+        element: <Fridge />,
       },
       {
         path: "add-food",
@@ -27,7 +30,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "my-items",
-        element: <div>My Items Page</div>,
+        element: <MyItems />,
       },
       {
         path: "login",
@@ -36,6 +39,10 @@ export const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "food/:id",
+        element: <FoodDetails />,
       },
     ],
   },
