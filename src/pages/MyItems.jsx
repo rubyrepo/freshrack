@@ -56,21 +56,36 @@ const MyItems = () => {
     }
   };
 
+  // Update the handleUpdate function
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
+      // Create a formatted food object with only the fields we want to update
+      const updatedFood = {
+        foodTitle: selectedFood.foodTitle,
+        foodImage: selectedFood.foodImage,
+        category: selectedFood.category,
+        quantity: Number(selectedFood.quantity),
+        expiryDate: new Date(selectedFood.expiryDate).toISOString(),
+        description: selectedFood.description
+      };
+
       const response = await fetch(`http://localhost:3000/api/foods/${selectedFood._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(selectedFood),
+        body: JSON.stringify(updatedFood),
       });
 
-      if (!response.ok) throw new Error('Failed to update food');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to update food');
+      }
 
       await fetchUserFoods();
       setIsUpdateModalOpen(false);
+      setSelectedFood(null);
       Swal.fire('Success', 'Food item updated successfully!', 'success');
     } catch (error) {
       Swal.fire('Error', error.message, 'error');
@@ -177,10 +192,10 @@ const MyItems = () => {
                     type="text"
                     className="input input-bordered"
                     value={selectedFood.foodTitle}
-                    onChange={(e) => setSelectedFood({
-                      ...selectedFood,
+                    onChange={(e) => setSelectedFood(prev => ({
+                      ...prev,
                       foodTitle: e.target.value
-                    })}
+                    }))}
                     required
                   />
                 </div>
@@ -192,10 +207,10 @@ const MyItems = () => {
                   <select
                     className="select select-bordered"
                     value={selectedFood.category}
-                    onChange={(e) => setSelectedFood({
-                      ...selectedFood,
+                    onChange={(e) => setSelectedFood(prev => ({
+                      ...prev,
                       category: e.target.value
-                    })}
+                    }))}
                     required
                   >
                     {categories.map(category => (
@@ -212,12 +227,13 @@ const MyItems = () => {
                   </label>
                   <input
                     type="number"
+                    min="1"
                     className="input input-bordered"
                     value={selectedFood.quantity}
-                    onChange={(e) => setSelectedFood({
-                      ...selectedFood,
+                    onChange={(e) => setSelectedFood(prev => ({
+                      ...prev,
                       quantity: e.target.value
-                    })}
+                    }))}
                     required
                   />
                 </div>
@@ -229,11 +245,11 @@ const MyItems = () => {
                   <input
                     type="date"
                     className="input input-bordered"
-                    value={selectedFood.expiryDate.split('T')[0]}
-                    onChange={(e) => setSelectedFood({
-                      ...selectedFood,
+                    value={selectedFood.expiryDate?.split('T')[0]}
+                    onChange={(e) => setSelectedFood(prev => ({
+                      ...prev,
                       expiryDate: e.target.value
-                    })}
+                    }))}
                     required
                   />
                 </div>
