@@ -107,7 +107,7 @@ const Register = () => {
         <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Name */}
+          
           <div className="flex flex-col">
             <label className="mb-1 font-medium text-gray-700">Name</label>
             <input
@@ -121,7 +121,7 @@ const Register = () => {
             />
           </div>
 
-          {/* Email */}
+          
           <div className="flex flex-col">
             <label className="mb-1 font-medium text-gray-700">Email</label>
             <input
@@ -135,7 +135,7 @@ const Register = () => {
             />
           </div>
 
-          {/* Photo URL */}
+          
           <div className="flex flex-col">
             <label className="mb-1 font-medium text-gray-700">Photo URL (optional)</label>
             <input
@@ -148,7 +148,7 @@ const Register = () => {
             />
           </div>
 
-          {/* Password */}
+          
           <div className="flex flex-col">
             <label className="mb-1 font-medium text-gray-700">Password</label>
             <input
@@ -165,7 +165,7 @@ const Register = () => {
             {passwordError && <span className="text-red-500 text-sm mt-1">{passwordError}</span>}
           </div>
 
-          {/* Submit */}
+          
           <button
             type="submit"
             disabled={loading || !!passwordError}
@@ -179,14 +179,14 @@ const Register = () => {
           </button>
         </form>
 
-        {/* OR Divider */}
+        
         <div className="my-4 flex items-center">
           <hr className="flex-1 border-gray-300" />
           <span className="mx-2 text-gray-400">OR</span>
           <hr className="flex-1 border-gray-300" />
         </div>
 
-        {/* Google Register */}
+        
         <button
           onClick={handleGoogleRegister}
           className="w-full px-4 py-2 border border-gray-300 rounded flex items-center justify-center gap-2 hover:bg-gray-100 transition"

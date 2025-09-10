@@ -12,7 +12,7 @@ const Expired = () => {
 
   const fetchExpiredFoods = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/foods/expired');
+      const response = await fetch('https://freshrackserver.vercel.app/api/foods/expired');
       if (!response.ok) throw new Error('Failed to fetch expired foods');
       const data = await response.json();
       setExpiredFoods(data);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router';
-import { AlertCircle } from 'lucide-react'; // nice icon for warning
+import { AlertCircle } from 'lucide-react';
 
 const NearlyExpiry = () => {
   const [foods, setFoods] = useState([]);
@@ -12,7 +12,7 @@ const NearlyExpiry = () => {
 
   const fetchNearlyExpiryFoods = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/foods/nearly-expired');
+      const response = await fetch('https://freshrackserver.vercel.app/api/foods/nearly-expired');
       if (!response.ok) throw new Error('Failed to fetch foods');
       const data = await response.json();
       setFoods(data);

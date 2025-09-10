@@ -29,7 +29,7 @@ const Fridge = () => {
   const fetchFoods = async () => {
     try {
       setLoading(true);
-      let url = "http://localhost:3000/api/foods";
+      let url = "https://freshrackserver.vercel.app/api/foods";
       const params = new URLSearchParams();
 
       if (searchTerm) params.append("search", searchTerm);
@@ -55,7 +55,7 @@ const Fridge = () => {
     }
   };
 
-  // Debounce search
+  
   const debounce = (func, wait) => {
     let timeout;
     return (...args) => {
@@ -76,11 +76,11 @@ const Fridge = () => {
   return (
     <div className="min-h-screen p-6 bg-gray-50">
       <div className="max-w-7xl mx-auto">
-        {/* Top controls */}
+        
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
           <h2 className="text-2xl font-bold text-gray-800">My Fridge</h2>
 
-          {/* Search + Filter */}
+          
           <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
             <input
               type="text"
@@ -103,14 +103,14 @@ const Fridge = () => {
           </div>
         </div>
 
-        {/* Error Message */}
+        
         {error && (
           <div className="mb-6 p-4 bg-red-100 border border-red-300 text-red-700 rounded-lg">
             {error}
           </div>
         )}
 
-        {/* Food Grid */}
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {foods.map((food) => (
             <div
@@ -157,7 +157,7 @@ const Fridge = () => {
           ))}
         </div>
 
-        {/* Empty State */}
+        
         {foods.length === 0 && !loading && (
           <div className="text-center py-16">
             <h3 className="text-xl font-semibold text-gray-700 mb-2">

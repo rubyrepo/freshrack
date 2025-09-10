@@ -18,7 +18,7 @@ const FoodDetails = () => {
 
   const fetchFoodDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/foods/${id}`);
+      const response = await fetch(`https://freshrackserver.vercel.app/api/foods/${id}`);
       if (!response.ok) throw new Error("Food not found");
       const data = await response.json();
       setFood(data);
@@ -32,7 +32,7 @@ const FoodDetails = () => {
   const fetchNotes = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/foods/${id}/notes`
+        `https://freshrackserver.vercel.app/api/foods/${id}/notes`
       );
       if (!response.ok) throw new Error("Failed to fetch notes");
       const data = await response.json();
@@ -46,7 +46,7 @@ const FoodDetails = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3000/api/foods/${id}/notes`,
+        `https://freshrackserver.vercel.app/api/foods/${id}/notes`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -99,7 +99,7 @@ const FoodDetails = () => {
   return (
     <div className="min-h-screen p-6 bg-gray-50">
       <div className="max-w-4xl mx-auto bg-white shadow-md rounded-xl overflow-hidden">
-        {/* Food Info */}
+        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
           <img
             src={food.foodImage}
@@ -140,11 +140,11 @@ const FoodDetails = () => {
           </div>
         </div>
 
-        {/* Notes Section */}
+        
         <div className="border-t border-gray-200 p-6">
           <h3 className="text-xl font-semibold mb-4 text-gray-800">Notes</h3>
 
-          {/* Add Note Form */}
+          
           <form onSubmit={handleAddNote} className="mb-6">
             <textarea
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
@@ -170,7 +170,7 @@ const FoodDetails = () => {
             </div>
           </form>
 
-          {/* Notes List */}
+          
           <div className="space-y-4">
             {notes.length > 0 ? (
               notes.map((note, index) => (

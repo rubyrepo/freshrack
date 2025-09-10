@@ -5,9 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 py-10 mt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Services */}
           <div>
             <h6 className="text-white font-semibold mb-4">Services</h6>
             <ul className="space-y-2">
@@ -18,7 +16,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Company */}
           <div>
             <h6 className="text-white font-semibold mb-4">Company</h6>
             <ul className="space-y-2">
@@ -29,7 +26,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Legal */}
           <div>
             <h6 className="text-white font-semibold mb-4">Legal</h6>
             <ul className="space-y-2">
@@ -40,20 +36,16 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row items-center justify-between">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-2 mb-4 md:mb-0">
             <img src="/src/assets/icons8-leaf-48.png" alt="logo" className="h-8 w-8" />
             <span className="text-white font-semibold text-lg">FreshRack</span>
           </Link>
 
-          {/* Copyright */}
           <p className="text-sm text-gray-400">
             © {new Date().getFullYear()} FreshRack. All rights reserved.
           </p>
 
-          {/* Socials */}
           <div className="flex gap-4 mt-4 md:mt-0">
             <a href="#" className="hover:text-green-500 transition-colors">Twitter</a>
             <a href="#" className="hover:text-green-500 transition-colors">Facebook</a>

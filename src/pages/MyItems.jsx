@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
 
-// Set modal app element for accessibility
+
 Modal.setAppElement("#root");
 
 const MyItems = () => {
@@ -51,7 +51,7 @@ const MyItems = () => {
   const fetchUserFoods = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/foods/user/${user.email}`
+        `https://freshrackserver.vercel.app/api/foods/user/${user.email}`
       );
       if (!response.ok) throw new Error("Failed to fetch foods");
       const data = await response.json();
@@ -76,7 +76,7 @@ const MyItems = () => {
       };
 
       const response = await fetch(
-        `http://localhost:3000/api/foods/${selectedFood._id}`,
+        `https://freshrackserver.vercel.app/api/foods/${selectedFood._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -101,7 +101,7 @@ const MyItems = () => {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/foods/${selectedFood._id}`,
+        `https://freshrackserver.vercel.app/api/foods/${selectedFood._id}`,
         { method: "DELETE" }
       );
 
@@ -182,7 +182,7 @@ const MyItems = () => {
           </table>
         </div>
 
-        {/* Update Modal */}
+        
         <Modal
           isOpen={isUpdateModalOpen}
           onRequestClose={() => setIsUpdateModalOpen(false)}
@@ -293,7 +293,7 @@ const MyItems = () => {
           )}
         </Modal>
 
-        {/* Delete Modal */}
+        
         <Modal
           isOpen={isDeleteModalOpen}
           onRequestClose={() => setIsDeleteModalOpen(false)}

@@ -45,7 +45,7 @@ const AddFood = () => {
         userEmail: user.email,
       };
 
-      const response = await fetch("http://localhost:3000/api/foods", {
+      const response = await fetch("https://freshrackserver.vercel.app/api/foods", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(foodData),
@@ -77,7 +77,7 @@ const AddFood = () => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Food Image URL */}
+            
             <div className="flex flex-col">
               <label className="mb-1 font-medium text-gray-700">
                 Food Image URL
@@ -93,7 +93,7 @@ const AddFood = () => {
               />
             </div>
 
-            {/* Food Title */}
+            
             <div className="flex flex-col">
               <label className="mb-1 font-medium text-gray-700">
                 Food Title
@@ -109,7 +109,7 @@ const AddFood = () => {
               />
             </div>
 
-            {/* Category */}
+            
             <div className="flex flex-col">
               <label className="mb-1 font-medium text-gray-700">Category</label>
               <select
@@ -128,7 +128,7 @@ const AddFood = () => {
               </select>
             </div>
 
-            {/* Quantity */}
+
             <div className="flex flex-col">
               <label className="mb-1 font-medium text-gray-700">Quantity</label>
               <input
@@ -142,7 +142,7 @@ const AddFood = () => {
               />
             </div>
 
-            {/* Expiry Date */}
+            
             <div className="flex flex-col">
               <label className="mb-1 font-medium text-gray-700">Expiry Date</label>
               <input
@@ -156,7 +156,7 @@ const AddFood = () => {
             </div>
           </div>
 
-          {/* Description */}
+          
           <div className="flex flex-col">
             <label className="mb-1 font-medium text-gray-700">Description</label>
             <textarea
@@ -170,7 +170,7 @@ const AddFood = () => {
             ></textarea>
           </div>
 
-          {/* Submit Button */}
+          
           <div className="flex justify-center">
             <button
               type="submit"
