@@ -1,74 +1,142 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { useAuth } from '../context/AuthContext';
+import React, { useState } from "react";
+import { Link } from "react-router";
+import { useAuth } from "../context/AuthContext";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Dummy login function for testing
-  const handleDummyLogin = () => {
-    const { login } = useAuth();
-    login({ username: 'JohnDoe', email: 'john@example.com' });
-  };
+  const UserProfile = () => (
+    <div className="flex items-center gap-4">
+      <div className="relative group">
+        {user?.photoURL ? (
+          <img
+            src={user.photoURL}
+            alt={user.username}
+            className="w-9 h-9 rounded-full object-cover"
+          />
+        ) : (
+          <div className="flex items-center justify-center w-9 h-9 rounded-full bg-green-600 text-white font-semibold">
+            {user?.username?.[0]?.toUpperCase()}
+          </div>
+        )}
+
+        <div className="absolute hidden group-hover:block -bottom-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-sm rounded whitespace-nowrap">
+          {user?.username}
+        </div>
+      </div>
+      <button
+        onClick={logout}
+        className="text-gray-600 hover:text-red-500 transition-colors"
+      >
+        Logout
+      </button>
+    </div>
+  );
+
+  const navLinks = [
+    { to: "/", label: "Home" },
+    { to: "/fridge", label: "Fridge" },
+    ...(user
+      ? [
+          { to: "/add-food", label: "Add Food" },
+          { to: "/my-items", label: "My Items" },
+        ]
+      : []),
+  ];
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-            </svg>
+    <nav className="bg-white shadow-sm sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
+          
+          <Link to="/" className="flex items-center gap-2 font-bold text-xl">
+            <img src="/src/assets/icons8-leaf-48.png" alt="logo" className="h-8 w-8" />
+            <span className="text-gray-800">FreshRack</span>
+          </Link>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex gap-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-gray-600 hover:text-green-600 transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
-          <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/fridge">Fridge</Link></li>
+
+          {/* Right side */}
+          <div className="hidden md:flex items-center gap-4">
             {user ? (
+              <UserProfile />
+            ) : (
               <>
-                <li><Link to="/add-food">Add Food</Link></li>
-                <li><Link to="/my-items">My Items</Link></li>
+                <Link to="/login" className="text-gray-600 hover:text-green-600 transition-colors">
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+                >
+                  Register
+                </Link>
               </>
-            ) : null}
-          </ul>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
-        <Link to="/" className="btn btn-ghost text-xl">FreshRack</Link>
       </div>
 
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/fridge">Fridge</Link></li>
+      {/* Mobile Nav */}
+      {isOpen && (
+        <div className="md:hidden px-4 pb-4 space-y-3 bg-white shadow-sm">
+          {navLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              onClick={() => setIsOpen(false)}
+              className="block text-gray-600 hover:text-green-600 transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+
           {user ? (
-            <>
-              <li><Link to="/add-food">Add Food</Link></li>
-              <li><Link to="/my-items">My Items</Link></li>
-            </>
-          ) : null}
-        </ul>
-      </div>
-
-      <div className="navbar-end gap-2">
-        {user ? (
-          <>
-            <div className="tooltip tooltip-bottom" data-tip={user.username}>
-              <div className="avatar placeholder">
-                <div className="bg-neutral text-neutral-content rounded-full w-8">
-                  <span className="text-xl">{user.username[0]}</span>
-                </div>
-              </div>
+            <div className="flex items-center gap-4 pt-2 border-t border-gray-200">
+              <UserProfile />
             </div>
-            <button onClick={logout} className="btn btn-ghost">
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="btn btn-ghost">Login</Link>
-            <Link to="/register" className="btn btn-primary">Register</Link>
-          </>
-        )}
-      </div>
-    </div>
+          ) : (
+            <div className="flex gap-4 pt-2 border-t border-gray-200">
+              <Link
+                to="/login"
+                onClick={() => setIsOpen(false)}
+                className="text-gray-600 hover:text-green-600 transition-colors"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                onClick={() => setIsOpen(false)}
+                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+              >
+                Register
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
+    </nav>
   );
 };
 
