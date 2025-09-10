@@ -9,6 +9,7 @@ import AddFood from "../pages/AddFood";
 import Fridge from "../pages/Fridge";
 import FoodDetails from "../pages/FoodDetails";
 import MyItems from "../pages/MyItems";
+import NotFound from "../pages/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -45,5 +46,9 @@ export const router = createBrowserRouter([
         element: <FoodDetails />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
